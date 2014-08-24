@@ -1,3 +1,4 @@
+INSTALL_SCRIPT=install.sh
 EXTRA_CFLAGS += $(USER_EXTRA_CFLAGS)
 EXTRA_CFLAGS += -O1
 
@@ -96,7 +97,7 @@ SUBARCH := $(shell uname -m | sed -e s/i.86/i386/ | sed -e s/ppc/powerpc/ | sed 
 
 ARCH ?= $(SUBARCH)
 CROSS_COMPILE ?=
-KVER  := $(shell uname -r)
+KVER  ?= $(shell uname -r)
 KSRC ?= /lib/modules/$(KVER)/build
 MODDESTDIR := /lib/modules/$(KVER)/kernel/drivers/net/wireless
 INSTALL_PREFIX :=
@@ -140,19 +141,51 @@ else
 
 export CONFIG_RTL8188EU = m
 
-all: modules
+include config.mk
+
+all: check info kernel_config modules out
+
+check:
+	@test -e $(PWD)/config.gz || { echo "config.gz does not exist please copy here /proc/config.gz file raspberry pi"; exit 1; }
+	@test -d $(PWD)/../linux || { echo "../linux folder does not exist - clone raspbery sources"; exit 1; }
+	@test -d $(PWD)/../firmware || { echo "../firmware folder does not exist - clone raspberry sources"; exit 1; }
+	@test -d $(PWD)/../tools || { echo "../tools folder does not exist - clone raspberry sources"; exit 1; }
+
+info:
+	@echo CROSS_COMPILE $(CROSS_COMPILE)
+	@echo ARCH $(ARCH)
+	@echo KVER $(KVER)
+	@echo KSRC $(KSRC)
+	@echo JOBS $(JOBS)
+	@echo SYMVERS $(SYMVERS)
+
+kernel_config:
+	zcat config.gz > $(KSRC)/.config
+	cp -f $(SYMVERS) $(KSRC)/Module.symvers
+	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KSRC) oldconfig
+	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KSRC) -j$(JOBS) modules_prepare
 
 modules:
-	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KSRC) M=$(shell pwd)  modules
+	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KSRC) M=$(PWD) -j$(JOBS) modules
 
 strip:
 	$(CROSS_COMPILE)strip 8188eu.ko --strip-unneeded
 
-install:
-	install -p -D -m 644 8188eu.ko  $(MODDESTDIR)/8188eu.ko
-	/sbin/depmod -a ${KVER}
-	mkdir -p /lib/firmware/rtlwifi
-	cp -n rtl8188eufw.bin /lib/firmware/rtlwifi/.
+out:
+	@echo "#!/bin/bash" > $(INSTALL_SCRIPT)
+	@echo "set -x" > $(INSTALL_SCRIPT)
+	@echo "install -p -D -m 644 8188eu.ko  /lib/modules/$(KVER)/kernel/drivers/net/wireless" >> $(INSTALL_SCRIPT)
+	@echo "mkdir -p /lib/firmware/rtlwifi" >> $(INSTALL_SCRIPT)
+	@echo "cp -n rtl8188eufw.bin /lib/firmware/rtlwifi/" >> $(INSTALL_SCRIPT)
+	@echo "/sbin/depmod -a ${KVER}" >> $(INSTALL_SCRIPT)
+	@echo "insmod /lib/modules/$(KVER)/kernel/drivers/net/wireless/8188eu.ko" >> $(INSTALL_SCRIPT)
+	@chmod 700 $(INSTALL_SCRIPT)
+	-mkdir out
+	cp -f 8188eu.ko out/
+	cp -f rtl8188eufw.bin out/
+	cp -f install.sh out/
+	@echo 
+	@echo copy out dir to raspery pi and run sudo ./install.sh
 
 uninstall:
 	rm -f $(MODDESTDIR)/8188eu.ko
@@ -171,6 +204,8 @@ clean: $(clean_more)
 	rm -fr *.mod.c *.mod *.o .*.cmd *.ko *~
 	rm -fr .tmp_versions
 	rm -fr Module.symvers ; rm -fr Module.markers ; rm -fr modules.order
+	rm -fr out
+	rm -f $(INSTALL_SCRIPT)
 	cd core ; rm -fr *.mod.c *.mod *.o .*.cmd *.ko
 	cd hal ; rm -fr *.mod.c *.mod *.o .*.cmd *.ko
 	cd os_dep ; rm -fr *.mod.c *.mod *.o .*.cmd *.ko

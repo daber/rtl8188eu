@@ -1,28 +1,37 @@
-rtl8188eu
-=========
+How to cross compile driver
 
-Repository for the stand-alone RTL8188EU driver.
+For simplicity let's assume that you work in folder called GIT
 
-Compiling & Building
----------
-### Dependencies
-To compile the driver, you need to have make and a compiler installed. In addition,
-you must have the kernel headers installed. If you do not understand what this means,
-consult your distro.
-### Compiling
+Downloading source (pick different git branches if you are not compiling for current master)
 
-> make all
+0. create enter GIT folder 
 
-### Installing
+1. Clone this repository.
 
-> sudo make install
+git clone --depth=1 [this]
 
-Submitting Issues
----------
+2. Clone raspbery pi kernel source
 
-Frequently asked Questions
----------
+git clone --depth=1 [kernel]
 
-### The network manager says: "Device is not ready"!
-Make sure you copied the firmware (rtl8188eufw.bin) to /lib/firmware/rtlwifi/
+3. Clone build tools
 
+git clone --depth=1 [tools]
+
+4. Clone build tools
+
+git clone --depth=1 [tools]
+
+
+After steps 0-4 you should have following structure:
+GIT
+|-/linux
+|-/rtl8188eu
+|-/tools
+|-/firmware
+   
+5. go to GIT/rtl8188eu folder. Then into that folder copy /proc/config.gz file from your raspberry PI (use ethernet and SCP or copy proc/config.gz to sdcard and use card reader to copy)
+
+6. Copy out dir back to RPi
+
+7. On RPI enter out folder then sudo ./install.sh. -after that donle should start blinking.
