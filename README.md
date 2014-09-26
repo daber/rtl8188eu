@@ -1,6 +1,7 @@
-How to cross compile driver
+How to cross compile rtl8188eu driver
 
 For simplicity let's assume that you work in folder called GIT
+
 
 Downloading source (pick different git branches if you are not compiling for current master)
 
@@ -15,6 +16,7 @@ git clone --depth=1 https://github.com/daber/rtl8188eu.git
 git clone --depth=1 https://github.com/raspberrypi/linux.git
 
 3. Clone build tools
+
 
 git clone --depth=1 https://github.com/raspberrypi/tools.git
 
