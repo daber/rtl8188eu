@@ -28,12 +28,15 @@ GIT
 |-/tools
 |-/firmware
    
-5. go to GIT/rtl8188eu folder. Then into that folder copy /proc/config.gz file from your raspberry PI (use ethernet and SCP or copy proc/config.gz to sdcard and use card reader to copy to PC)
+   
+5. go to GIT/rtl8188eu folder. Then into rtl8188 folder copy /proc/config.gz file from your raspberry PI (use ethernet and SCP or copy proc/config.gz to sdcard and use card reader to copy to PC)
 
-6. in rtl8188eu folder run "make" command
+6. On RPi execute command uname -r, then on PC modify variable KVER with the value retured by uname command.
 
-7. Copy out dir back to RPi
+7. in rtl8188eu folder run "make" command
 
-8. On RPI enter out folder then sudo ./install.sh. -after that dongle should start blinking.
+8. Copy out dir back to RPi
+
+9. On RPI enter out folder then sudo ./install.sh. -after that dongle should start blinking.
 
 Enjoy
