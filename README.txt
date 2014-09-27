@@ -31,7 +31,7 @@ GIT
    
 5. go to GIT/rtl8188eu folder. Then into rtl8188 folder copy /proc/config.gz file from your raspberry PI (use ethernet and SCP or copy proc/config.gz to sdcard and use card reader to copy to PC)
 
-6. On RPi execute command uname -r, then on PC modify variable KVER with the value retured by uname command.
+6. On RPi execute command uname -r, then on PC open config.mk file in text editor and modify variable KVER with the value retured by uname command.
 
 7. in rtl8188eu folder run "make" command
 
