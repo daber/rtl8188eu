@@ -5,7 +5,7 @@ For simplicity let's assume that you work in folder called GIT
 
 Downloading source (pick different git branches if you are not compiling for current master)
 
-0. create enter GIT folder 
+0. create and enter GIT folder 
 
 1. Clone this repository.
 
