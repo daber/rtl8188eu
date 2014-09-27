@@ -33,7 +33,7 @@ GIT
 
 6. On RPi execute command uname -r, then on PC open config.mk file in text editor and modify variable KVER with the value retured by uname command.
 
-7. in rtl8188eu folder run "make" command
+7. in rtl8188eu folder run "make" command; if some question about new modules appear answer with m
 
 8. Copy out dir back to RPi
 
