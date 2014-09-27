@@ -33,10 +33,12 @@ GIT
 
 6. On RPi execute command uname -r, then on PC open config.mk file in text editor and modify variable KVER with the value retured by uname command.
 
-7. in rtl8188eu folder run "make" command; if some question about new modules appear answer "m"
+7. in rtl8188eu folder run "make" command; if some question about new modules appear answer "M"
 
 8. Copy out dir back to RPi
 
-9. On RPI enter out folder then sudo ./install.sh. -after that dongle should start blinking.
+9. On RPI enter out folder then sudo ./install.sh. -after that dongle should be now visible in ifconfig
 
-Enjoy
+10. Configure your wifi ( easiest way startx wpa_gui)
+
+Enjoy wireless freedom ;)
