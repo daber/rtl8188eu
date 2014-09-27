@@ -7,25 +7,21 @@ Downloading source (pick different git branches if you are not compiling for cur
 
 0. create and enter GIT folder 
 
-1. Clone this repository.
 
-git clone --depth=1 https://github.com/daber/rtl8188eu.git
+1. Clone this repository.
+	git clone --depth=1 https://github.com/daber/rtl8188eu.git
 
 2. Clone raspbery pi kernel source
-
-git clone --depth=1 https://github.com/raspberrypi/linux.git
+	git clone --depth=1 https://github.com/raspberrypi/linux.git
 
 3. Clone build tools
-
-
-git clone --depth=1 https://github.com/raspberrypi/tools.git
+	git clone --depth=1 https://github.com/raspberrypi/tools.git
 
 4. Clone build firmware
+	git clone --depth=1 https://github.com/raspberrypi/firmware.git
 
-git clone --depth=1 https://github.com/raspberrypi/firmware.git
 
-
-After steps 0-4 you should have following structure:
+After these steps you should have following structure:
 GIT
 |-/linux
 |-/rtl8188eu
@@ -38,4 +34,6 @@ GIT
 
 7. Copy out dir back to RPi
 
-8. On RPI enter out folder then sudo ./install.sh. -after that donle should start blinking.
+8. On RPI enter out folder then sudo ./install.sh. -after that dongle should start blinking.
+
+Enjoy
