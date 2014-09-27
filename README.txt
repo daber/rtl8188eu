@@ -28,7 +28,7 @@ GIT
 |-/tools
 |-/firmware
    
-5. go to GIT/rtl8188eu folder. Then into that folder copy /proc/config.gz file from your raspberry PI (use ethernet and SCP or copy proc/config.gz to sdcard and use card reader to copy)
+5. go to GIT/rtl8188eu folder. Then into that folder copy /proc/config.gz file from your raspberry PI (use ethernet and SCP or copy proc/config.gz to sdcard and use card reader to copy to PC)
 
 6. in rtl8188eu folder run "make" command
 
