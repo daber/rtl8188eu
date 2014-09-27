@@ -9,16 +9,16 @@ Downloading source (pick different git branches if you are not compiling for cur
 
 
 1. Clone this repository.
-	git clone --depth=1 https://github.com/daber/rtl8188eu.git
+	git clone --depth 1 https://github.com/daber/rtl8188eu.git
 
 2. Clone raspbery pi kernel source
-	git clone --depth=1 https://github.com/raspberrypi/linux.git
+	git clone --depth 1 https://github.com/raspberrypi/linux.git
 
 3. Clone build tools
-	git clone --depth=1 https://github.com/raspberrypi/tools.git
+	git clone --depth 1 https://github.com/raspberrypi/tools.git
 
 4. Clone build firmware
-	git clone --depth=1 https://github.com/raspberrypi/firmware.git
+	git clone --depth 1 https://github.com/raspberrypi/firmware.git
 
 
 After these steps you should have following structure:
