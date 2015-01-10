@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #fill it with value given by command "uname -r" executed on your raspberry pi.
-KVER:="3.12.28+"
+KVER:="3.12.35+"
 
 
 #the rest you should rather not touch================================================
