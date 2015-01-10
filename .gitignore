@@ -22,16 +22,18 @@
 *.lst
 *.symtypes
 *.order
-modules.builtin
 *.elf
 *.bin
 *.gz
 *.bz2
 *.lzma
 *.xz
+*.lz4
 *.lzo
 *.patch
 *.gcno
+modules.builtin
+Module.symvers
 
 #
 # Top-level generic files
@@ -43,7 +45,6 @@ modules.builtin
 /vmlinuz
 /System.map
 /Module.markers
-/Module.symvers
 
 #
 # Debian directory (make deb-pkg)
@@ -80,8 +81,6 @@ GRTAGS
 GSYMS
 GTAGS
 
-*.rej
-*.porig
 *.orig
 *~
 \#*#
@@ -94,3 +93,5 @@ signing_key.priv
 signing_key.x509
 x509.genkey
 
+# Kconfig presets
+all.config
